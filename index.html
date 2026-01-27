@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EJERCICIOS LECCIÓN 01 - Operaciones con Polinomios</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1B5E7F 0%, #0d3a4f 100%);
+            padding: 30px;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .logo-section {
+            flex: 1;
+        }
+
+        .logo-section h2 {
+            font-size: 24px;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .logo-section .orange-text {
+            color: #E87722;
+            font-weight: 700;
+        }
+
+        .logo-section .yellow-text {
+            color: #F5B233;
+            font-weight: 700;
+        }
+
+        .language-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .toggle-btn {
+            background: #E87722;
+            border: 2px solid #F5B233;
+            color: white;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .toggle-btn:hover {
+            background: #F5B233;
+            transform: scale(1.05);
+        }
+
+        .main-title {
+            font-size: 32px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 10px 0;
+            font-weight: 700;
+        }
+
+        /* Content */
+        .content {
+            padding: 40px;
+        }
+
+        .instructions {
+            background: #f9f9f9;
+            border-left: 5px solid #E87722;
+            padding: 20px;
+            margin-bottom: 40px;
+            border-radius: 5px;
+        }
+
+        .instructions h3 {
+            color: #E87722;
+            margin-bottom: 10px;
+            font-size: 18px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .instructions p {
+            color: #555;
+            font-size: 15px;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            background: linear-gradient(90deg, #1B5E7F 0%, #2a7ba5 100%);
+            color: white;
+            padding: 15px 20px;
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            border-left: 5px solid #F5B233;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-number {
+            background: #E87722;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        /* Exercise grid */
+        .exercises-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .exercise {
+            background: #f5f5f5;
+            border: 2px solid #E87722;
+            padding: 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .exercise:hover {
+            box-shadow: 0 5px 15px rgba(232, 119, 34, 0.2);
+            border-color: #F5B233;
+            transform: translateY(-2px);
+        }
+
+        .exercise-label {
+            display: inline-block;
+            background: #1B5E7F;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .exercise-content {
+            font-family: 'Courier New', monospace;
+            font-size: 15px;
+            color: #333;
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 3px solid #E87722;
+            line-height: 1.8;
+        }
+
+        .exercise-content .math {
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        /* Division section special style */
+        .division-exercises {
+            display: grid;
+            gap: 20px;
+        }
+
+        .division-exercise {
+            background: #f5f5f5;
+            border: 2px solid #1B5E7F;
+            padding: 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .division-exercise:hover {
+            box-shadow: 0 5px 15px rgba(27, 94, 127, 0.2);
+            border-color: #E87722;
+        }
+
+        .division-label {
+            display: inline-block;
+            background: #E87722;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1B5E7F;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 13px;
+        }
+
+        .footer span {
+            color: #F5B233;
+            font-weight: 700;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .language-toggle {
+                position: static;
+                margin-bottom: 15px;
+            }
+
+            .toggle-btn {
+                width: 100%;
+            }
+
+            .main-title {
+                font-size: 24px;
+            }
+
+            .exercises-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+
+        /* Submission section */
+        .submission-box {
+            background: linear-gradient(135deg, #f0f7ff 0%, #f5f5f5 100%);
+            border: 2px dashed #1B5E7F;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .submission-title {
+            color: #1B5E7F;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .submission-title::before {
+            content: "📤";
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        .submission-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .option-card {
+            background: white;
+            border: 2px solid #E87722;
+            padding: 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .option-card:hover {
+            box-shadow: 0 5px 15px rgba(232, 119, 34, 0.2);
+            border-color: #F5B233;
+            transform: translateY(-2px);
+        }
+
+        .option-icon {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .option-title {
+            color: #1B5E7F;
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .option-description {
+            color: #666;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .input-group {
+            margin-top: 15px;
+            display: none;
+        }
+
+        .input-group.active {
+            display: block;
+        }
+
+        .input-group input,
+        .input-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .input-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .input-group input:focus,
+        .input-group textarea:focus {
+            outline: none;
+            border-color: #E87722;
+            box-shadow: 0 0 5px rgba(232, 119, 34, 0.3);
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #E87722 0%, #d46a1a 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            width: 100%;
+            text-transform: uppercase;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #F5B233 0%, #f0a01f 100%);
+            transform: scale(1.02);
+        }
+
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-input-wrapper input[type=file] {
+            position: absolute;
+            left: -9999px;
+        }
+
+        .file-input-label {
+            display: block;
+            padding: 10px;
+            background: #f9f9f9;
+            border: 1px dashed #E87722;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            color: #E87722;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .file-input-label:hover {
+            background: #fff5f0;
+            border-color: #F5B233;
+        }
+
+        .file-name {
+            margin-top: 8px;
+            color: #666;
+            font-size: 12px;
+        }
+
+        .recording-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .record-btn, .stop-btn, .play-btn {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #E87722;
+            background: white;
+            color: #E87722;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .record-btn:hover, .stop-btn:hover, .play-btn:hover {
+            background: #E87722;
+            color: white;
+        }
+
+        .record-btn:disabled, .stop-btn:disabled, .play-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .recording-status {
+            margin-top: 10px;
+            padding: 10px;
+            background: #fff3cd;
+            border-left: 3px solid #F5B233;
+            color: #856404;
+            font-size: 13px;
+            border-radius: 3px;
+            display: none;
+        }
+
+        .recording-status.show {
+            display: block;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .language-toggle {
+                display: none;
+            }
+
+            .submission-box {
+                display: none;
+            }
+
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+        }
+
+        /* Responsive table for formulas */
+        .formula {
+            word-break: break-word;
+            white-space: normal;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="language-toggle">
+                <button class="toggle-btn" onclick="toggleLanguage()">
+                    <span id="langToggleText">EN / ES</span>
+                </button>
+            </div>
+            
+            <div class="header-content">
+                <div class="logo-section">
+                    <h2><span class="orange-text">TAREA</span> / <span class="yellow-text">INVESTIGACIÓN</span></h2>
+                    <p style="font-size: 14px; opacity: 0.9;">ESCOLARIS</p>
+                </div>
+            </div>
+
+            <div class="main-title" id="mainTitle">EJERCICIOS LECCIÓN 01</div>
+            <p style="font-size: 14px; margin-top: 10px;" id="subtitle">Operaciones con Polinomios</p>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Instructions -->
+            <div class="instructions">
+                <h3 id="instructionsTitle">Instrucciones:</h3>
+                <p id="instructionsText">Realice las siguientes operaciones entre polinomios. Deje constancia de su procedimiento.</p>
+            </div>
+
+            <!-- Submission Options -->
+            <div class="submission-box">
+                <div class="submission-title" id="submissionTitle">Enviar tu trabajo</div>
+                
+                <div class="submission-options">
+                    <!-- Option 1: Web URL -->
+                    <div class="option-card" onclick="toggleInput('url-input')">
+                        <div class="option-icon">🔗</div>
+                        <div class="option-title" id="urlOptionTitle">Enlace Web</div>
+                        <div class="option-description" id="urlOptionDesc">Envía el enlace a tu trabajo publicado en línea</div>
+                        <div class="input-group" id="url-input">
+                            <input type="url" id="urlInput" placeholder="https://ejemplo.com/mi-trabajo" required>
+                            <button class="submit-btn" onclick="submitURL()"><span id="submitUrlBtn">Enviar Enlace</span></button>
+                        </div>
+                    </div>
+
+                    <!-- Option 2: Multimedia Recording -->
+                    <div class="option-card" onclick="toggleInput('recording-input')">
+                        <div class="option-icon">🎙️</div>
+                        <div class="option-title" id="recordingOptionTitle">Grabación de Multimedia</div>
+                        <div class="option-description" id="recordingOptionDesc">Graba un audio o video explicando tu solución</div>
+                        <div class="input-group" id="recording-input">
+                            <div class="recording-controls">
+                                <button class="record-btn" id="recordBtn" onclick="startRecording()"><span id="recordText">Grabar</span></button>
+                                <button class="stop-btn" id="stopBtn" onclick="stopRecording()" disabled><span id="stopText">Detener</span></button>
+                                <button class="play-btn" id="playBtn" onclick="playRecording()" disabled><span id="playText">Reproducir</span></button>
+                            </div>
+                            <div class="recording-status" id="recordingStatus">
+                                <span id="recordingTime">Grabando: 0s</span>
+                            </div>
+                            <audio id="audioPlayback" style="width: 100%; margin: 10px 0;"></audio>
+                            <button class="submit-btn" onclick="submitRecording()"><span id="submitRecordingBtn">Enviar Grabación</span></button>
+                        </div>
+                    </div>
+
+                    <!-- Option 3: File Upload -->
+                    <div class="option-card" onclick="document.getElementById('fileUpload').click()">
+                        <div class="option-icon">📁</div>
+                        <div class="option-title" id="uploadOptionTitle">Cargar Archivo</div>
+                        <div class="option-description" id="uploadOptionDesc">Sube tu documento (PDF, imagen, Word, etc.)</div>
+                        <div class="input-group" id="file-input">
+                            <div class="file-input-wrapper">
+                                <input type="file" id="fileUpload" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.gif,.xls,.xlsx" onchange="handleFileSelect()">
+                                <label for="fileUpload" class="file-input-label">
+                                    <span id="fileInputText">Haz clic para seleccionar archivo</span>
+                                </label>
+                                <div class="file-name" id="fileName"></div>
+                            </div>
+                            <button class="submit-btn" onclick="submitFile()" style="margin-top: 10px;"><span id="submitFileBtn">Enviar Archivo</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1: Addition and Subtraction -->
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-number">1</div>
+                    <span id="section1Title">Suma o Resta de Polinomios</span>
+                </div>
+
+                <div class="exercises-grid">
+                    <div class="exercise">
+                        <div class="exercise-label">a</div>
+                        <div class="exercise-content formula">
+                            (12x − 7) − (5x − 12)
+                        </div>
+                    </div>
+
+                    <div class="exercise">
+                        <div class="exercise-label">b</div>
+                        <div class="exercise-content formula">
+                            (3x² + x + 1) + (2x² − 3x − 5)
+                        </div>
+                    </div>
+
+                    <div class="exercise">
+                        <div class="exercise-label">c</div>
+                        <div class="exercise-content formula">
+                            3(x − 1) + 4(x + 2)
+                        </div>
+                    </div>
+
+                    <div class="exercise">
+                        <div class="exercise-label">d</div>
+                        <div class="exercise-content formula">
+                            8(2x + 5) − 7(x − 9)
+                        </div>
+                    </div>
+
+                    <div class="exercise">
+                        <div class="exercise-label">e</div>
+                        <div class="exercise-content formula">
+                            4(x² − 3x + 5) − 3(x² − 2x + 1)
+                        </div>
+                    </div>
+
+                    <div class="exercise">
+                        <div class="exercise-label">f</div>
+                        <div class="exercise-content formula">
+                            2(2 − 5t) + t²(t − 1) − (t⁴ − 1)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Products -->
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-number">2</div>
+                    <span id="section2Title">Productos entre Polinomios</span>
+                </div>
+
+                <div class="exercises-grid">
+                    <div class="exercise">
+                        <div class="exercise-label">a</div>
+                        <div class="exercise-content formula">
+                            (3t − 2)(7t − 4)
+                        </div>
+                    </div>
+
+                    <div class="exercise">
+                        <div class="exercise-label">b</div>
+                        <div class="exercise-content formula">
+                            (3x + 5)(2x − 1)
+                        </div>
+                    </div>
+
+                    <div class="exercise">
+                        <div class="exercise-label">c</div>
+                        <div class="exercise-content formula">
+                            (x + 3y)(2x − y)
+                        </div>
+                    </div>
+
+                    <div class="exercise">
+                        <div class="exercise-label">d</div>
+                        <div class="exercise-content formula">
+                            (x + 1)(2x² − x + 1)
+                        </div>
+                    </div>
+
+                    <div class="exercise">
+                        <div class="exercise-label">e</div>
+                        <div class="exercise-content formula">
+                            (1 + 2x)(x² − 3x + 1)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Long Division -->
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-number">3</div>
+                    <span id="section3Title">División Larga de Polinomios</span>
+                </div>
+
+                <div class="division-exercises">
+                    <div class="division-exercise">
+                        <div class="division-label">a</div>
+                        <div class="exercise-content formula">
+                            (x² − 6x − 8) ÷ (x − 4)
+                        </div>
+                    </div>
+
+                    <div class="division-exercise">
+                        <div class="division-label">b</div>
+                        <div class="exercise-content formula">
+                            (4x³ + 2x² − 2x − 3) ÷ (2x + 1)
+                        </div>
+                    </div>
+
+                    <div class="division-exercise">
+                        <div class="division-label">c</div>
+                        <div class="exercise-content formula">
+                            (x³ + 6x + 3) ÷ (x² − 2x + 2)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p><span>ESCOLARIS</span> - Plataforma de Educación Digital | Lección 01</p>
+        </div>
+    </div>
+
+    <script>
+        let currentLanguage = 'es';
+        let mediaRecorder;
+        let audioChunks = [];
+        let recordingStartTime;
+        let recordingInterval;
+
+        const translations = {
+            es: {
+                mainTitle: 'EJERCICIOS LECCIÓN 01',
+                subtitle: 'Operaciones con Polinomios',
+                instructionsTitle: 'Instrucciones:',
+                instructionsText: 'Realice las siguientes operaciones entre polinomios. Deje constancia de su procedimiento.',
+                section1Title: 'Suma o Resta de Polinomios',
+                section2Title: 'Productos entre Polinomios',
+                section3Title: 'División Larga de Polinomios',
+                langToggle: 'EN / ES',
+                submissionTitle: 'Enviar tu trabajo',
+                urlOptionTitle: 'Enlace Web',
+                urlOptionDesc: 'Envía el enlace a tu trabajo publicado en línea',
+                recordingOptionTitle: 'Grabación de Multimedia',
+                recordingOptionDesc: 'Graba un audio o video explicando tu solución',
+                uploadOptionTitle: 'Cargar Archivo',
+                uploadOptionDesc: 'Sube tu documento (PDF, imagen, Word, etc.)',
+                recordText: 'Grabar',
+                stopText: 'Detener',
+                playText: 'Reproducir',
+                recordingTime: 'Grabando: ',
+                submitUrlBtn: 'Enviar Enlace',
+                submitRecordingBtn: 'Enviar Grabación',
+                submitFileBtn: 'Enviar Archivo',
+                fileInputText: 'Haz clic para seleccionar archivo'
+            },
+            en: {
+                mainTitle: 'LESSON 01 EXERCISES',
+                subtitle: 'Operations with Polynomials',
+                instructionsTitle: 'Instructions:',
+                instructionsText: 'Perform the following operations between polynomials. Show your work.',
+                section1Title: 'Addition or Subtraction of Polynomials',
+                section2Title: 'Products of Polynomials',
+                section3Title: 'Long Division of Polynomials',
+                langToggle: 'EN / ES',
+                submissionTitle: 'Submit your work',
+                urlOptionTitle: 'Web Link',
+                urlOptionDesc: 'Submit the link to your work published online',
+                recordingOptionTitle: 'Multimedia Recording',
+                recordingOptionDesc: 'Record audio or video explaining your solution',
+                uploadOptionTitle: 'File Upload',
+                uploadOptionDesc: 'Upload your document (PDF, image, Word, etc.)',
+                recordText: 'Record',
+                stopText: 'Stop',
+                playText: 'Play',
+                recordingTime: 'Recording: ',
+                submitUrlBtn: 'Submit Link',
+                submitRecordingBtn: 'Submit Recording',
+                submitFileBtn: 'Submit File',
+                fileInputText: 'Click to select file'
+            }
+        };
+
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'es' ? 'en' : 'es';
+            updatePageLanguage();
+        }
+
+        function updatePageLanguage() {
+            const trans = translations[currentLanguage];
+            
+            document.getElementById('mainTitle').textContent = trans.mainTitle;
+            document.getElementById('subtitle').textContent = trans.subtitle;
+            document.getElementById('instructionsTitle').textContent = trans.instructionsTitle;
+            document.getElementById('instructionsText').textContent = trans.instructionsText;
+            document.getElementById('section1Title').textContent = trans.section1Title;
+            document.getElementById('section2Title').textContent = trans.section2Title;
+            document.getElementById('section3Title').textContent = trans.section3Title;
+            document.getElementById('langToggleText').textContent = trans.langToggle;
+            document.getElementById('submissionTitle').textContent = trans.submissionTitle;
+            document.getElementById('urlOptionTitle').textContent = trans.urlOptionTitle;
+            document.getElementById('urlOptionDesc').textContent = trans.urlOptionDesc;
+            document.getElementById('recordingOptionTitle').textContent = trans.recordingOptionTitle;
+            document.getElementById('recordingOptionDesc').textContent = trans.recordingOptionDesc;
+            document.getElementById('uploadOptionTitle').textContent = trans.uploadOptionTitle;
+            document.getElementById('uploadOptionDesc').textContent = trans.uploadOptionDesc;
+            document.getElementById('recordText').textContent = trans.recordText;
+            document.getElementById('stopText').textContent = trans.stopText;
+            document.getElementById('playText').textContent = trans.playText;
+            document.getElementById('submitUrlBtn').textContent = trans.submitUrlBtn;
+            document.getElementById('submitRecordingBtn').textContent = trans.submitRecordingBtn;
+            document.getElementById('submitFileBtn').textContent = trans.submitFileBtn;
+            document.getElementById('fileInputText').textContent = trans.fileInputText;
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = currentLanguage;
+        }
+
+        // Toggle input fields
+        function toggleInput(inputId) {
+            const allInputs = document.querySelectorAll('.input-group');
+            allInputs.forEach(input => input.classList.remove('active'));
+            document.getElementById(inputId).classList.add('active');
+        }
+
+        // URL Submission
+        function submitURL() {
+            const urlInput = document.getElementById('urlInput').value;
+            if (!urlInput) {
+                alert(currentLanguage === 'es' ? 'Por favor ingresa una URL válida' : 'Please enter a valid URL');
+                return;
+            }
+            alert(currentLanguage === 'es' ? `Enlace enviado: ${urlInput}` : `Link submitted: ${urlInput}`);
+            document.getElementById('urlInput').value = '';
+        }
+
+        // Recording Functions
+        async function startRecording() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                mediaRecorder = new MediaRecorder(stream);
+                audioChunks = [];
+
+                mediaRecorder.ondataavailable = (event) => {
+                    audioChunks.push(event.data);
+                };
+
+                mediaRecorder.start();
+                document.getElementById('recordBtn').disabled = true;
+                document.getElementById('stopBtn').disabled = false;
+                document.getElementById('recordingStatus').classList.add('show');
+                
+                recordingStartTime = Date.now();
+                recordingInterval = setInterval(updateRecordingTime, 1000);
+            } catch (error) {
+                alert(currentLanguage === 'es' ? 'Error al acceder al micrófono' : 'Error accessing microphone');
+            }
+        }
+
+        function updateRecordingTime() {
+            const elapsed = Math.floor((Date.now() - recordingStartTime) / 1000);
+            const timeText = currentLanguage === 'es' ? 'Grabando: ' : 'Recording: ';
+            document.getElementById('recordingTime').textContent = timeText + elapsed + 's';
+        }
+
+        function stopRecording() {
+            if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+                mediaRecorder.stop();
+                clearInterval(recordingInterval);
+                document.getElementById('recordBtn').disabled = false;
+                document.getElementById('stopBtn').disabled = true;
+                document.getElementById('playBtn').disabled = false;
+                document.getElementById('recordingStatus').classList.remove('show');
+
+                mediaRecorder.onstop = () => {
+                    const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                    const audioUrl = URL.createObjectURL(audioBlob);
+                    document.getElementById('audioPlayback').src = audioUrl;
+                };
+            }
+        }
+
+        function playRecording() {
+            const audio = document.getElementById('audioPlayback');
+            if (audio.src) {
+                audio.play();
+            }
+        }
+
+        function submitRecording() {
+            const audio = document.getElementById('audioPlayback');
+            if (!audio.src) {
+                alert(currentLanguage === 'es' ? 'Por favor graba un audio primero' : 'Please record audio first');
+                return;
+            }
+            alert(currentLanguage === 'es' ? 'Grabación enviada correctamente' : 'Recording submitted successfully');
+            document.getElementById('audioPlayback').src = '';
+            document.getElementById('recordBtn').disabled = false;
+            document.getElementById('playBtn').disabled = true;
+        }
+
+        // File Upload
+        function handleFileSelect() {
+            const fileInput = document.getElementById('fileUpload');
+            if (fileInput.files.length > 0) {
+                const fileName = fileInput.files[0].name;
+                const fileSize = (fileInput.files[0].size / 1024 / 1024).toFixed(2);
+                document.getElementById('fileName').textContent = `${currentLanguage === 'es' ? 'Archivo' : 'File'}: ${fileName} (${fileSize} MB)`;
+            }
+        }
+
+        function submitFile() {
+            const fileInput = document.getElementById('fileUpload');
+            if (!fileInput.files.length) {
+                alert(currentLanguage === 'es' ? 'Por favor selecciona un archivo' : 'Please select a file');
+                return;
+            }
+            const fileName = fileInput.files[0].name;
+            alert(currentLanguage === 'es' ? `Archivo "${fileName}" enviado correctamente` : `File "${fileName}" submitted successfully`);
+            fileInput.value = '';
+            document.getElementById('fileName').textContent = '';
+        }
+
+        // Initialize
+        updatePageLanguage();
+    </script>
+</body>
+</html>
